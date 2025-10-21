@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Fee Checker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Crypto Fee Checker</h1>
+    <p>Check withdrawal fees and minimum withdrawal amounts across exchanges.</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <label for="exchange">Choose Exchange:</label>
+      <select id="exchange">
+        <option value="binance">Binance</option>
+        <option value="kucoin">KuCoin</option>
+        <option value="coinbase">Coinbase</option>
+      </select>
+
+      <label for="coin">Select Coin:</label>
+      <select id="coin">
+        <option value="BTC">Bitcoin (BTC)</option>
+        <option value="ETH">Ethereum (ETH)</option>
+        <option value="USDT">Tether (USDT)</option>
+      </select>
+      <button id="checkBtn">Check Fees</button>
+    </div>
+
+    <div class="results">
+      <h2>Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Exchange</th>
+            <th>Coin</th>
+            <th>Withdrawal Fee</th>
+            <th>Minimum Amount</th>
+          </tr>
+        </thead>
+        <tbody id="results-body">
+          <tr><td colspan="4">Enter a selection and click “Check Fees.”</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <p>Powered by CoinGecko Public API</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

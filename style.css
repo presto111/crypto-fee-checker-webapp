@@ -1,0 +1,65 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #0a0a0a;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  background: linear-gradient(90deg, #2e2eff, #00d1ff);
+  color: white;
+  padding: 30px;
+}
+
+.controls {
+  text-align: center;
+  margin: 30px auto;
+}
+
+select, button {
+  margin: 10px;
+  padding: 8px 14px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  background-color: #00aaff;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #0077cc;
+}
+
+.results {
+  width: 80%;
+  margin: auto;
+  background: #121212;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+th, td {
+  border: 1px solid #333;
+  padding: 12px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #444;
+  font-size: 14px;
+  color: #aaa;
+}

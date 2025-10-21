@@ -23,7 +23,8 @@ label {
   display: inline-block;
   margin: 0 10px 10px 0;
   font-weight: bold;
-  color: #44aaff;
+  color: #1976d2;
+  font-size: 1.14rem;
 }
 
 select,
@@ -99,26 +100,41 @@ footer {
   color: #aaa;
 }
 
-/* Choices.js overrides for dropdown styling */
-.choices__inner {
-  background-color: #222;
-  border: 1px solid #44aaff;
-  color: #eee;
-  border-radius: 5px;
-}
-
-.choices__input,
-.choices__input:focus {
-  color: #fff;
-}
-
-.choices__list--dropdown {
-  background-color: #222;
+/* Choices.js: better appearance & visibility */
+.choices__inner,
+.choices__list--dropdown,
+.choices__list[role="listbox"] {
+  background-color: #222 !important;
+  color: #fff !important;
   border: 1px solid #44aaff;
   border-radius: 5px;
+  font-size: 1rem;
+}
+
+.choices__list--dropdown .choices__item--selectable {
+  color: #fff !important;
+  background: #232323 !important;
 }
 
 .choices__list--dropdown .choices__item--selectable.is-highlighted {
-  background-color: #0077cc;
-  color: white;
+  background-color: #0077cc !important;
+  color: #fff !important;
+}
+
+/* Limit dropdown height, add custom scrollbar */
+.choices__list--dropdown,
+.choices__list[role="listbox"] {
+  max-height: 220px !important;
+  overflow-y: auto !important;
+}
+
+.choices__list--dropdown::-webkit-scrollbar,
+.choices__list[role="listbox"]::-webkit-scrollbar {
+  width: 8px;
+  background: #111;
+}
+.choices__list--dropdown::-webkit-scrollbar-thumb,
+.choices__list[role="listbox"]::-webkit-scrollbar-thumb {
+  background: #44aaff;
+  border-radius: 5px;
 }

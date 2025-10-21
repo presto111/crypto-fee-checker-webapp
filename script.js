@@ -1,6 +1,9 @@
 const resultsBody = document.getElementById("results-body");
 const checkBtn = document.getElementById("checkBtn");
 const exchangeSelect = document.getElementById('exchange');
+const coinSelect = document.getElementById('coin');
+
+let coinChoices; // Choices.js instance
 
 // Static fallback fee structure (approximation or placeholder)
 const staticFees = {
@@ -15,13 +18,10 @@ async function populateExchanges() {
     const response = await fetch('https://api.coingecko.com/api/v3/exchanges');
     const exchanges = await response.json();
 
-    // Clear existing options
     exchangeSelect.innerHTML = '';
-
-    // Add top 20 exchanges for brevity
     exchanges.slice(0, 20).forEach(exchange => {
       const option = document.createElement('option');
-      option.value = exchange.id;   // API ID like 'binance'
+      option.value = exchange.id;
       option.textContent = exchange.name;
       exchangeSelect.appendChild(option);
     });
@@ -30,40 +30,77 @@ async function populateExchanges() {
   }
 }
 
-// Fetch live price data from CoinGecko
-async function fetchLivePrice(coin) {
+// Populate coins dynamically from CoinGecko
+async function populateCoins() {
   try {
-    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`);
+    const response = await fetch('https://api.coingecko.com/api/v3/coins/list');
+    const coins = await response.json();
+
+    const popularSymbols = ['btc', 'eth', 'usdt', 'bnb', 'ada', 'xrp', 'doge', 'dot', 'sol', 'ltc'];
+
+    const options = popularSymbols.map(symbol => {
+      const coin = coins.find(c => c.symbol.toLowerCase() === symbol);
+      if (coin) {
+        return { value: coin.id, label: `${coin.name} (${coin.symbol.toUpperCase()})` };
+      }
+      return null;
+    }).filter(Boolean);
+
+    if (coinChoices) {
+      coinChoices.setChoices(options, 'value', 'label', true);
+    } else {
+      coinSelect.innerHTML = options.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('');
+    }
+  } catch (err) {
+    console.error('Error fetching coins:', err);
+  }
+}
+
+// Fetch live price data from CoinGecko using coin id
+async function fetchLivePrice(coinId) {
+  try {
+    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`);
     const data = await response.json();
-    return data[coin]?.usd ? `$${data[coin].usd}` : "N/A";
+    return data[coinId]?.usd ? `$${data[coinId].usd}` : "N/A";
   } catch {
     return "Unavailable";
   }
 }
 
-// Call populateExchanges when page loads
-populateExchanges();
+// Initialize dropdowns and Choices.js
+async function initialize() {
+  await populateExchanges();
+  await populateCoins();
+
+  // Initialize Choices.js for coin dropdown
+  coinChoices = new Choices('#coin', {
+    searchEnabled: true,
+    itemSelectText: '',
+    shouldSort: false,
+  });
+}
+
+initialize();
 
 checkBtn.addEventListener("click", async () => {
   const exchange = exchangeSelect.value;
-  const coin = document.getElementById("coin").value;
-  const coinIdMap = { BTC: "bitcoin", ETH: "ethereum", USDT: "tether" };
+  const coinId = coinSelect.value;
 
   resultsBody.innerHTML = `<tr><td colspan="4">Fetching data...</td></tr>`;
 
-  // Use static fees if available, else show N/A
-  let localFees = staticFees[exchange]?.[coin];
+  // Approximate coin symbol from coinId (take string after last dash if present)
+  const coinSymbol = coinId.split('-').pop().toUpperCase();
+  let localFees = staticFees[exchange]?.[coinSymbol];
   if (!localFees) {
     localFees = { fee: "N/A", min: "N/A" };
   }
 
-  // Fetch live price
-  const livePriceUSD = await fetchLivePrice(coinIdMap[coin]);
+  const livePriceUSD = await fetchLivePrice(coinId);
 
   resultsBody.innerHTML = `
     <tr>
       <td>${exchange.charAt(0).toUpperCase() + exchange.slice(1)}</td>
-      <td>${coin}</td>
+      <td>${coinSymbol}</td>
       <td>${localFees.fee}</td>
       <td>${localFees.min}</td>
     </tr>

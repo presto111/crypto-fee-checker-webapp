@@ -16,13 +16,27 @@ header {
 .controls {
   text-align: center;
   margin: 30px auto;
+  max-width: 600px;
 }
 
-select, button {
-  margin: 10px;
+label {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  font-weight: bold;
+  color: #44aaff;
+}
+
+select,
+button {
+  margin: 10px 15px 10px 0;
   padding: 8px 14px;
   border-radius: 5px;
   border: none;
+  font-size: 16px;
+}
+
+select {
+  min-width: 200px;
 }
 
 button {
@@ -30,6 +44,7 @@ button {
   color: white;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -37,11 +52,13 @@ button:hover {
 }
 
 .results {
-  width: 80%;
-  margin: auto;
+  width: 90%;
+  max-width: 700px;
+  margin: 30px auto;
   background: #121212;
   border-radius: 8px;
   padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 162, 255, 0.4);
 }
 
 table {
@@ -50,10 +67,28 @@ table {
   color: #fff;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #333;
   padding: 12px;
   text-align: center;
+}
+
+.api-info {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #88ccff;
+  text-align: center;
+}
+
+.api-info a {
+  color: #00aaff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.api-info a:hover {
+  text-decoration: underline;
 }
 
 footer {
@@ -62,4 +97,28 @@ footer {
   border-top: 1px solid #444;
   font-size: 14px;
   color: #aaa;
+}
+
+/* Choices.js overrides for dropdown styling */
+.choices__inner {
+  background-color: #222;
+  border: 1px solid #44aaff;
+  color: #eee;
+  border-radius: 5px;
+}
+
+.choices__input,
+.choices__input:focus {
+  color: #fff;
+}
+
+.choices__list--dropdown {
+  background-color: #222;
+  border: 1px solid #44aaff;
+  border-radius: 5px;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+  background-color: #0077cc;
+  color: white;
 }

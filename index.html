@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crypto Fee Checker</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 </head>
 <body>
   <header>
@@ -16,14 +18,12 @@
     <div class="controls">
       <label for="exchange">Choose Exchange:</label>
       <select id="exchange">
-        <!-- Options dynamically populated by script.js -->
+        <!-- Options dynamically populated -->
       </select>
 
       <label for="coin">Select Coin:</label>
       <select id="coin">
-        <option value="BTC">Bitcoin (BTC)</option>
-        <option value="ETH">Ethereum (ETH)</option>
-        <option value="USDT">Tether (USDT)</option>
+        <!-- Options dynamically populated with search -->
       </select>
       <button id="checkBtn">Check Fees</button>
     </div>
@@ -53,6 +53,8 @@
     <p>Powered by CoinGecko Public API</p>
   </footer>
 
+  <!-- Choices.js JS -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

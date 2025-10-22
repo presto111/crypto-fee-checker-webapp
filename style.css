@@ -133,8 +133,30 @@ footer {
   width: 8px;
   background: #111;
 }
+
 .choices__list--dropdown::-webkit-scrollbar-thumb,
 .choices__list[role="listbox"]::-webkit-scrollbar-thumb {
   background: #44aaff;
   border-radius: 5px;
+}
+
+/* Compact and cleaner coin dropdown styles */
+#coin + .choices {
+  min-width: 180px;
+  max-width: 220px;
+  font-size: 0.9rem;
+}
+
+#coin + .choices .choices__list--dropdown {
+  max-width: 220px !important;
+}
+
+#coin + .choices .choices__list--dropdown .choices__item {
+  padding: 6px 10px !important;
+}
+
+#coin + .choices .choices__inner {
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
 }

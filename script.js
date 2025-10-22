@@ -37,7 +37,6 @@ async function populateCoins() {
     const coins = await response.json();
 
     const popularSymbols = ['btc', 'eth', 'usdt', 'bnb', 'ada', 'xrp', 'doge', 'dot', 'sol', 'ltc'];
-
     const options = popularSymbols.map(symbol => {
       const coin = coins.find(c => c.symbol.toLowerCase() === symbol);
       if (coin) {
@@ -72,9 +71,9 @@ async function initialize() {
   await populateExchanges();
   await populateCoins();
 
-  // Initialize Choices.js for coin dropdown
+  // Initialize Choices.js for coin dropdown without search
   coinChoices = new Choices('#coin', {
-    searchEnabled: true,
+    searchEnabled: false, // Disable search
     itemSelectText: '',
     shouldSort: false,
   });
